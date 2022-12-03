@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-server-a
+spec:
+  selector:
+    matchLabels:
+      run: go-server
+  template:
+    metadata:
+      labels:
+        run: go-server
+    spec:
+      containers:
+      - name: go-server
+        image: go-server
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8080
+        env:
+        - name: POD_NAME
+          value: A
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-server-b
+spec:
+  selector:
+    matchLabels:
+      run: go-server
+  template:
+    metadata:
+      labels:
+        run: go-server
+    spec:
+      containers:
+      - name: go-server
+        image: go-server
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8080
+        env:
+        - name: POD_NAME
+          value: B
